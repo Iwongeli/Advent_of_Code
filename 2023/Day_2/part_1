@@ -1,0 +1,41 @@
+f = open('2\input.txt', 'r')
+RED = 12
+GREEN = 13 
+BLUE = 14
+res = 0
+for line in f:
+    game_num = line.split()[1][:-1]
+    
+    sets = line.strip().split(';')
+    if int(game_num) < 10:
+        sets[0] = sets[0][8:]
+    elif int(game_num) < 100:
+        sets[0] = sets[0][9:]
+    else:
+        sets[0] = sets[0][10:]
+    print(game_num, sets)
+    Works = True
+    for s in sets:
+        s = s.split()
+        for x in range(0, len(s)):
+            print(s[x])
+            if s[x][-1] == ',':
+                s[x] = s[x][:-1]
+                print(s[x])
+            if s[x] == 'red':
+                if int(s[x-1]) > RED:
+                    print('Does not work')
+                    Works = False
+            if s[x] == 'green':
+                if int(s[x-1]) > GREEN:
+                    print('Does not work')
+                    Works = False
+            if s[x] == 'blue':
+                if int(s[x-1]) > BLUE:
+                    print('Does not work')  
+                    Works = False
+    if Works == True:
+        res += int(game_num)
+print(res)
+        
+            
