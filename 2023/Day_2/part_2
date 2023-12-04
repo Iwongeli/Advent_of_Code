@@ -1,0 +1,38 @@
+f = open('2\input.txt', 'r')
+res = 0
+for line in f:
+    game_num = line.split()[1][:-1]
+    
+    sets = line.strip().split(';')
+    if int(game_num) < 10:
+        sets[0] = sets[0][8:]
+    elif int(game_num) < 100:
+        sets[0] = sets[0][9:]
+    else:
+        sets[0] = sets[0][10:]
+    print(game_num, sets)
+    RED = 0
+    GREEN = 0
+    BLUE = 0
+    for s in sets:
+        s = s.split()
+        for x in range(0, len(s)):
+
+            if s[x][-1] == ',':
+                s[x] = s[x][:-1]
+
+            if s[x] == 'red':
+                if int(s[x-1]) > RED:
+                    RED = int(s[x-1])
+            if s[x] == 'green':
+                if int(s[x-1]) > GREEN:
+                    GREEN = int(s[x-1])
+            if s[x] == 'blue':
+                if int(s[x-1]) > BLUE:
+                    BLUE = int(s[x-1])
+    power = RED * GREEN * BLUE
+    print('power:', power)
+    res += power
+print('Sum of powers:', res)
+        
+            
